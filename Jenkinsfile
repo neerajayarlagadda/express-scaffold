@@ -14,7 +14,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          dockerImage = docker.build registry
+          dockerImage = docker.build "818845199322.dkr.ecr.ap-south-1.amazonaws.com/neeraja-express-scaffold-test"
         }
       }
     }
