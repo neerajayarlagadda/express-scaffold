@@ -4,9 +4,9 @@ WORKDIR /home/node/app
 COPY package.json ./
 RUN npm install 
 
-RUN apt update && apt upgrade
-    apt install curl
-    apt install sudo
+RUN apt-get update && apt-get upgrade
+    apt-get install curl
+    apt-get install sudo
     apt-get install zip
     apt-get install unzip
     apt-get install python3
