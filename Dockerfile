@@ -1,16 +1,20 @@
-FROM node:lts-alpine
+FROM node:bullseye
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 WORKDIR /home/node/app
 COPY package.json ./
 RUN npm install 
 
-RUN apk add --no-cache \
+RUN apt-get update && \
+    apt-get install -y \
         python3 \
-        py3-pip \
+        python3-pip \
+        python3-setuptools \
+        groff \
+        less \
     && pip3 install --upgrade pip \
-    && pip3 install --no-cache-dir \
-        awscli \
-    && rm -rf /var/cache/apk/*
+    && apt-get clean
+RUN pip3 --no-cache-dir install --upgrade awscli
+
 RUN aws --version
 COPY . .
 EXPOSE 3000
