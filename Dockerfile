@@ -4,15 +4,14 @@ WORKDIR /home/node/app
 COPY package.json ./
 RUN npm install 
 
-RUN apt-get update && \
-    apt-get install -y \
-        python3 \
-        python3-pip \
-        python3-setuptools \
-        groff \
-        less \
-    && pip3 install --upgrade pip \
-    && apt-get clean
+RUN apk update && apk upgrade
+/apk install curl
+/apk install sudo
+/apk install zip
+/apk install unzip
+/apk install python3
+/apk install python3.8-venv
+RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
 
 RUN pip3 --no-cache-dir install --upgrade awscli
 
