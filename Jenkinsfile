@@ -44,7 +44,7 @@ pipeline {
 //                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
 //                 ]]) 
                 {
-               sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+              sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 818845199322.dkr.ecr.ap-south-1.amazonaws.com"
              //  sh 'docker login -u AWS -p "$(aws ecr get-login-password --region ap-south-1)" 818845199322.dkr.ecr.ap-south-1.amazonaws.com'
                 }
                  
