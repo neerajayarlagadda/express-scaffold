@@ -33,23 +33,23 @@ pipeline {
 //             }
 //         }
 
-    stage('Logging into AWS ECR') {
-            steps {
-                withAWS(credentials: 'aws-credentials', region: "ap-south-1")
-//                 //withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>])
-//                 withCredentials([[
-//                     $class: 'AmazonWebServicesCredentialsBinding',
-//                     credentialsId: "aws-credentials",
-//                     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-//                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-//                 ]]) 
-                {
-              sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 818845199322.dkr.ecr.ap-south-1.amazonaws.com"
-             //  sh 'docker login -u AWS -p "$(aws ecr get-login-password --region ap-south-1)" 818845199322.dkr.ecr.ap-south-1.amazonaws.com'
-                }
+//     stage('Logging into AWS ECR') {
+//             steps {
+//                 withAWS(credentials: 'aws-credentials', region: "ap-south-1")
+// //                 //withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>])
+// //                 withCredentials([[
+// //                     $class: 'AmazonWebServicesCredentialsBinding',
+// //                     credentialsId: "aws-credentials",
+// //                     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+// //                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+// //                 ]]) 
+//                 {
+//               sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 818845199322.dkr.ecr.ap-south-1.amazonaws.com"
+//              //  sh 'docker login -u AWS -p "$(aws ecr get-login-password --region ap-south-1)" 818845199322.dkr.ecr.ap-south-1.amazonaws.com'
+//                 }
                  
-            }
-        }
+//             }
+//         }
     // Uploading Docker images into AWS ECR
     stage('Pushing to ECR') {
      steps{  
