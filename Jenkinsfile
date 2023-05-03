@@ -24,39 +24,6 @@ pipeline {
         }
       }
     }
-
-    stage('Logging into AWS ECR') {
-      steps {
-              withAWS(credentials: 'aws-credentials', region: 'ap-south-1') {
-                sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 818845199322.dkr.ecr.ap-south-1.amazonaws.com"
-               }                
-          }
-    }  
-           // Uploading Docker images into AWS ECR
-    stage('Pushing to ECR') {
-     steps{  
-         script {
-               
-                sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
-                sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
-         
-         }
-        }
-      }
-    // Stopping Docker containers for cleaner Docker run
-     stage('stop previous containers') {
-         steps {
-            sh 'docker ps -f neeraja-express-scaffold-test -q | xargs --no-run-if-empty docker container stop'
-            sh 'docker container ls -a -fname=neeraja-express-scaffold-test -q | xargs -r docker container rm'
-         }
-       }
-      
-    stage('Docker Run') {
-     steps{
-         script {
-                sh 'docker run -d -p 3000:3000 --rm --name neeraja-express-scaffold-test 818845199322.dkr.ecr.ap-south-1.amazonaws.com/neeraja-express-scaffold-test:latest'
-            }
-      }
-    }
+  
     }
 }
